@@ -1,0 +1,161 @@
+:root{
+    /*Fuente de texto*/
+    --fuenteHeading: 'PT Sans', sans-serif;
+    --fuenteParrafos: 'Open Sans', sans-serif;
+
+    /*Paleta de colores*/
+    /*1C7C54*/
+    --darkspringgreen: rgba(28,124,84,1);
+    /*73E2A7*/
+    --celadon: rgba(115,226,167,1);
+    /*DEF4C6*/
+    --teagreen: rgba(222,244,198,1);
+    /*1B512D*/
+    --calPolygreen: rgba(27,81,45,1);
+    /*B1CF5F*/
+    --yellowgreen: rgba(177,207,95,1);
+
+    --blanco: rgba(255,255,255,1);
+    --negro: rgba(0,0,0,1);
+
+}
+
+
+h1{
+    font-size: 3rem;
+    margin: 0 auto;
+}
+h2{
+    font-size: 2.8rem;
+}
+h3{
+    font-size: 1.5rem;
+}
+
+header{
+    background-color: var(--yellowgreen);
+    text-align: center;
+    font-family: var(--fuenteHeading);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.imgheader{
+    grid-column; 1 / 2;
+    grid-rows; 1 / 2;
+}
+
+.titulo{
+    grid-column; 2 / 3;
+}
+
+.botonmenu{
+    background-color: var(--teagreen);
+    width: 130px;
+    height: 30px;
+    margin: 1rem 1rem 0rem 0rem;
+    border: 0;
+    border-radius: 10px;
+    color: var(--negro);
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.botonmenu:hover{
+    background-color: var(--darkspringgreen);
+    color: var(--blanco);
+}
+
+
+.container {
+  position: relative;
+}
+
+#menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+}
+
+#menu{
+  background-color: var(--darkspringgreen);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem 2rem 1rem 1rem;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(-50px); /* Desplaza ligeramente el menú hacia arriba */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: none;
+  text-align: left;
+
+}
+
+.option{
+  color: var(--negro);
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+body{
+    background-color: var(--teagreen);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+main{
+    min-height: 100%;
+    flex: 1; /*Hace que main ocupe el espacio restante dentro del display flex que tiene body*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section{
+    background-color: var(--calPolygreen);
+    width: min(60rem , 100%); /* Utilizar el valor más pequeño entre 60rem y el 100% */
+    padding: 1rem;
+    border-radius: 0.8rem;
+    margin: 2rem auto 2rem auto;
+}
+
+.tabla{
+    text-align: center;
+    color: var(--blanco);
+}
+
+#cantidad {
+  font-size: 20px;
+  color: var(--blanco);
+  margin: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.button{
+    cursor: pointer;
+}
+
+footer{
+    background-color: var(--yellowgreen);
+
+}
+
+.foot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea los items */
+}
+
+.derechos{
+    display: flex;
+    margin-left: 2rem;
+}

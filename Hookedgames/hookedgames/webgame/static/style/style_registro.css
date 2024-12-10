@@ -1,0 +1,195 @@
+:root{
+    /*Fuente de texto*/
+    --fuenteHeading: 'PT Sans', sans-serif;
+    --fuenteParrafos: 'Open Sans', sans-serif;
+
+    /*Paleta de colores*/
+    /*1C7C54*/
+    --darkspringgreen: rgba(28,124,84,1);
+    /*73E2A7*/
+    --celadon: rgba(115,226,167,1);
+    /*DEF4C6*/
+    --teagreen: rgba(222,244,198,1);
+    /*1B512D*/
+    --calPolygreen: rgba(27,81,45,1);
+    /*B1CF5F*/
+    --yellowgreen: rgba(177,207,95,1);
+
+    --blanco: rgba(255,255,255,1);
+    --negro: rgba(0,0,0,1);
+    
+}
+
+
+header{
+    background-color: var(--yellowgreen);
+    text-align: center;
+    font-family: var(--fuenteHeading);
+}
+
+.atras{
+    background-color: var(--teagreen);
+    width: 100px;
+    height: 30px;
+    margin: 1rem 1rem 0rem 0rem;
+    border: 0;
+    border-radius: 10px;
+    color: var(--negro);
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.atras:hover{
+    background-color: var(--darkspringgreen);
+    color: var(--blanco);
+}
+
+body{
+    background-color: var(--teagreen);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 3rem;
+    margin: 0 auto;
+}
+h2{
+    font-size: 2.8rem;
+}
+h3{
+    font-size: 1.5rem;
+}
+
+main{
+    min-height: 100%;
+    flex: 1; /*Hace que main ocupe el espacio restante dentro del display flex que tiene body*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section{
+    background-color: var(--calPolygreen);
+    width: min(45rem , 100%); /* Utilizar el valor más pequeño entre 60rem y el 100% */
+    padding: 1rem;
+    border-radius: 0.8rem;
+    margin: auto;
+}
+
+
+.logintitle{
+    font-family: var(--fuenteHeading);
+    color: var(--blanco);
+    font-size: 1.5rem;
+}
+
+.formulario{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    max-width: 50%;
+    color: var(--blanco);
+    font-family: var(--fuenteParrafos);
+    align-items: center;
+}
+
+.campo_usuario{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.campo_apellidos{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.campo_direccion{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.campo_contraseña{
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.campo_correo{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.campo_telefono{
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.form_text{
+    width: 200px;
+    height: 20px;
+}
+
+.button{
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+}
+
+.form_submit{
+    background-color: var(--yellowgreen);
+    width: 200px;
+    margin-top: 2rem;
+    padding: 12px;
+    border: 0;
+    border-radius: 10px;
+    color: var(--blanco);
+    font-size: 1rem;
+}
+
+.form_submit:hover{
+    background-color: var(--celadon);
+    color: var(--negro);
+}
+
+
+footer{
+    background-color: var(--yellowgreen);
+
+}
+
+.foot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea los items */
+}
+
+.derechos{
+    display: flex;
+    margin-left: 2rem;
+}
+
+.enlaces{
+    display: flex;
+    column-gap: 4rem;
+    margin-right: 2rem;   
+}
+
+.enlaces_footer{
+    color: var(--negro);
+    text-decoration: none;
+}

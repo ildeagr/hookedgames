@@ -1,0 +1,137 @@
+:root{
+    /*Fuente de texto*/
+    --fuenteHeading: 'PT Sans', sans-serif;
+    --fuenteParrafos: 'Open Sans', sans-serif;
+
+    /*Paleta de colores*/
+    /*1C7C54*/
+    --darkspringgreen: rgba(28,124,84,1);
+    /*73E2A7*/
+    --celadon: rgba(115,226,167,1);
+    /*DEF4C6*/
+    --teagreen: rgba(222,244,198,1);
+    /*1B512D*/
+    --calPolygreen: rgba(27,81,45,1);
+    /*B1CF5F*/
+    --yellowgreen: rgba(177,207,95,1);
+
+    --blanco: rgba(255,255,255,1);
+    --negro: rgba(0,0,0,1);
+    
+}
+
+
+h1{
+    font-size: 3rem;
+    margin: 0 auto;
+}
+h2{
+    font-size: 2.8rem;
+}
+h3{
+    font-size: 1.5rem;
+}
+
+.cabecera{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(1,1fr);
+    background-color: var(--yellowgreen);
+    font-family: var(--fuenteHeading);
+}
+
+.imgheader{
+    grid-column: 2 / 3;
+}
+.navheader{
+    grid-column: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    margin-right: 2rem
+}
+
+.button{
+    cursor: pointer;
+    background-color: var(--darkspringgreen);
+    width: 100px;
+    padding: 3px;
+    border: 0;
+    border-radius: 10px;
+    color: var(--blanco);
+    font-size: 1rem;
+}
+
+body{
+    background-color: var(--teagreen);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+main{
+    min-height: 100%;
+    flex: 1; /*Hace que main ocupe el espacio restante dentro del display flex que tiene body*/
+}
+
+.videos{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.video1{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: center;
+}
+
+.video2{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+}
+
+.video3{
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    justify-self: center;
+}
+
+.video4{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+}
+
+
+footer{
+    background-color: var(--yellowgreen);
+
+}
+
+.foot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinea los items */
+}
+
+.derechos{
+    display: flex;
+    margin-left: 2rem;
+}
+
+.enlaces{
+    display: flex;
+    column-gap: 4rem;
+    margin-right: 2rem;   
+}
+
+.enlaces_footer{
+    color: var(--negro);
+    text-decoration: none;
+}

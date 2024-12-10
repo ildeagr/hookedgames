@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style/normalize.css'%}">
+    <link rel="stylesheet" href="{% static 'style/style_catalogo.css'%}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" >
+</head>
+<body>
+    <header>
+        <img class="imgheader" src="{% static 'image/logo_clientes.png'%}" alt="" width="100px" height="100px">
+        <h1 class="titulo">Catálogo de juegos y consolas</h1>
+        <div class="carrito">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cantidad" id="cantidad">0</span>
+        </div>
+        <div class="container">
+            <button class="botonmenu" id="myButton">Mi cuenta</button>
+            <div id="menu" class="dropdown-content">
+              <a class="option" href="{% url 'perfil' %}">Mi perfil</a>
+              <a class="option" href="{% url 'vercarrito' %}">Ver carrito</a>
+              <a class="option" href="{% url 'index' %}">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+        <main>
+            <section>
+                <fieldset>
+                     <form action="agregarcarrito" method="post">
+                        <table class="tabla" border="1" style="width:100%">
+                                <tr>
+                                    <th>TITULO</th>
+                                    <th>CARATULA</th>
+                                    <th>PLATAFORMA</th>
+                                    <th>PRECIO</th>
+                                    <th colspan="2">CANTIDAD</th>
+                                </tr>
+                            {% for id, titulo, caratula, precio in lista_catalogo %}
+                                <tr>
+                                    <td>{{titulo}}</td>
+                                    <td><img class="img" src="{% static 'image/'%}{{caratula}}" ></td>
+                                    <td>{{plataforma}}</td>
+                                    <td>{{precio}}</td>
+                                    <td><button id="button_add" name="agregar" value="{{id}}">Añadir</button></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </form>
+               </fieldset>
+            </section>
+        </main>
+    <footer class="foot">
+        <div class="derechos">
+            <p>© 2024 HookedGames. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/catalogo.js'%}"></script>
+    <script src="{% static 'js/menu.js'%}"></script>
+</body>
+</html>
