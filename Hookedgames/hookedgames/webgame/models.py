@@ -26,7 +26,7 @@ class Peticion:
     def select(self,email):
         cursor = self.connection.cursor()
         try:
-            consulta = "SELECT USER_PASSWORD FROM CLIEN WHERE CORREO=:P1"
+            consulta = "SELECT IDCLIEN,USER_PASSWORD FROM CLIEN WHERE CORREO=:P1"
             cursor.execute(consulta, (email,))
 
         except self.connection.Error as error:

@@ -21,7 +21,7 @@
         <main>
             <div class="contenedor">
                 <table border="1" style="width:100%">
-                            <tr>
+                            <tr class="tabla_columns">
                                 <th>CÓDIGO DE VENTA</th>
                                 <th>CÓDIGO EMPLEADO</th>
                                 <th>CÓDIGO CLIENTE</th>
@@ -30,7 +30,7 @@
                                 <th>FECHA VENTA</th>
                             </tr>
                             {% for idventa,idjuego,idempl,precio,fecha,idcliente in respuesta %}
-                                <tr>
+                                <tr class="tabla_rows">
                                     <td>{{idventa}}</td>
                                     <td>{{idempl}}</td>
                                      <td>{{idcliente}}</td>

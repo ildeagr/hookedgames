@@ -33,6 +33,9 @@
                             <input class="form_submit" type="submit" name="Iniciar sesión" value="Iniciar sesión">
                             <a class="form_regis" href="registro">Registrarse</a>
                         </div>
+                        {% if mensaje %}
+                        <h5>{{mensaje}}</h5>
+                        {% endif %}
                     </form>
                 </fieldset>
             </section>

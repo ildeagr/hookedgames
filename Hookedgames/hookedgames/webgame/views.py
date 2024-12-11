@@ -53,8 +53,9 @@ def catalogo(request):
      for i in respuesta:
           passw2 = i
 
-     if passw == passw2[0]:
-           request.session['usuario_id'] = email
+     if passw == passw2[1]:
+           request.session['usuario_email'] = email
+           request.session['usuario_id'] = passw2[0]
            consulta=Peticion()
            catalogue = consulta.uploadcata()
 
@@ -65,7 +66,11 @@ def catalogo(request):
 
            return render(request, "catalogo.html", context)
      else:
-          return render(request, "login.html")
+
+          context = {
+               'mensaje': 'Error de credenciales.vuelva a intentarlo o registre nuevo usuario.'
+          }
+          return render(request, "login.html",context)
 
 # Registra los datos del nuevo cliente en la BBDD
 def nuevocliente(request):
@@ -139,7 +144,7 @@ def contacto(request):
 # Agrega articulos al carrito
 def agregarcarrito(request):
      producto = ''
-     carrito = request.session.get('carrito', {})
+     carrito = request.session.get('carrito', [])
      idg = request.POST['agregar']
 
      consulta = Peticion()
@@ -170,7 +175,7 @@ def vercarrito(request):
 
 # Muestra los datos de perfil del cliente de la sesion abierta
 def perfil(request):
-     usuario = request.session['usuario_id']
+     usuario = request.session['usuario_email']
      consulta=Peticion()
      respuesta = consulta.selectclient(usuario)
 
@@ -183,6 +188,7 @@ def perfil(request):
 # Borra los datos almacenados de la sesion y muestra la página principal
 def cerrarsesion(request):
      request.session['usuario_id'] = ''
+     request.session['usuario_email'] = ''
      request.session['carrito'] = ''
      request.session['usuario_empl'] = ''
      return render(request, "index.html")
