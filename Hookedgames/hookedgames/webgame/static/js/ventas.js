@@ -1,30 +1,6 @@
 const links = document.querySelectorAll('.menu a');
 const formulario = document.querySelector('.formulario');
 
-formulario.innerHTML = `
-      <form action="ventas" method="post">
-        <div class="campo">
-          <label for="nombre">Id del juego:</label>
-          <input type="text" id="nombre" name="Id">
-        </div>
-        <div class="campo">
-          <label for="nombre">Sede:</label>
-          <input type="text" id="nombre" name="Sede">
-        </div>
-        <div class="campo">
-          <label for="nombre">Fecha:</label>
-          <input type="text" id="nombre" name="Fecha">
-        </div>
-        <div class="campo">
-          <label for="nombre">Id vendedor:</label>
-          <input type="text" id="nombre" name="Vendedor">
-        </div>
-        <div class="campo">
-          <button type="submit">Enviar</button>
-        </div>
-      </form>
-    `;
-
 links.forEach(link => {
   link.addEventListener('click', (event) => {
     event.preventDefault();

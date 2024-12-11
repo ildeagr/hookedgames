@@ -25,11 +25,11 @@ function cargarFormulario(formId) {
     formulario.innerHTML = `
       <form action="buscarstock" method="post">
         <div class="campo">
-          <label for="nombre">Id del juego:</label>
-          <input type="text" id="nombre" name="nombre">
+          <label for="nombre">Título del juego:</label>
+          <input type="text" id="nombre" name="titulo">
         </div>
         <div class="campo">
-          <button type="submit">Enviar</button>
+          <button type="submit">Buscar juego</button>
         </div>
       </form>
     `;
@@ -40,14 +40,14 @@ function cargarFormulario(formId) {
       <form action="modificarstock" method="post">
         <div class="campo">
           <label for="nombre">Id del juego:</label>
-          <input type="text" id="nombre" name="nombre">
+          <input type="text" id="nombre" name="txtidg">
         </div>
         <div class="campo">
           <label for="nombre">Indicar cantidad en stock:</label>
-          <input type="text" id="nombre" name="nombre">
+          <input type="text" id="nombre" name="txtcantidad">
         </div>
         <div class="campo">
-          <button type="submit">Enviar</button>
+          <button type="submit">Cargar stock</button>
         </div>
       </form>
     `;
@@ -55,7 +55,7 @@ function cargarFormulario(formId) {
 
   else if (formId === 'form3') {
     formulario.innerHTML = `
-      <form action="stockcompleto" method="post">
+      <form action="stockcompleto" method="get">
         <div class="campo_submit">
           <button type="submit">Ver stock completo</button>
         </div>

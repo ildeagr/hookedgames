@@ -26,20 +26,16 @@
             </div>
         </div>
     </header>
-        <main>
+        <h2 class="subtitulo">Nuevas tendencias en juegos</h2>
+        <main >
             <div class="videos">
-                <video class="video1" width="320" height="240" controls>
-                    <source src="{% static 'video/Elden.mp4' %}" type="video/mp4">
-                </video>
-                <video class="video2" width="320" height="240" controls>
-                    <source src="{% static 'video/Horizon.mp4' %}" type="video/mp4">
-                </video>
-                <video class="video3" width="320" height="240" controls>
-                    <source src="{% static 'video/Spider.mp4' %}" type="video/mp4">
-                </video>
-                <video class="video4" width="320" height="240" controls>
-                    <source src="{% static 'video/Rachet.mp4' %}" type="video/mp4">
-                </video>
+                {% for juegos in datos %}
+                <section class="game">
+                    <div><img class="image" src="{{juegos.background_image}}"></div>
+                    <div><h4>{{juegos.name}}</h4></div>
+                    <div><h4>Puntuación: {{juegos.rating}}</h4></div>
+                </section>
+                {% endfor %}
             </div>
         </main>
     <footer class="foot">

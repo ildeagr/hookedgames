@@ -110,20 +110,19 @@ main{
     color: var(--blanco);
   }
 
-.campo{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    max-width: 30%;
-    margin: 1rem 0.5rem 0rem 1rem;
-}
-.campo_submit{
-    margin-left: 2rem;
+.contenedor{
+    margin: 2rem 1rem 2rem 1rem;
 }
 
-button{
-    margin-top: 2rem;
-    grid-column: 2 / 3;
+.tabla_columns{
+    background-color: var(--turquoise);
 }
+
+.tabla_rows{
+    background-color: var(--ashgray);
+    color: var(--blanco);
+}
+
 
 footer{
     background-color: var(--turquoise);

@@ -15,19 +15,34 @@
         <a href="http://127.0.0.1:5500/index.html">
             <img class="imgheader" src="{% static 'image/logo_empleados.png'%}" alt="" width="100px" height="100px">
         </a>
-        <h1 class="titulo">Gestión de ventas</h1>
+        <h1 class="titulo">Control de ventas</h1>
         <button class="atras" onclick="history.back()">Volver</button>
     </header>
         <main>
-            <div>
-                <div class="menu">
-                    <a class="button" href="#" data-form="form1">Buscar datos</a>
-                    <a class="button" href="#" data-form="form2">Ver Ventas</a>
-                </div>
-                <div class="formulario">
-                    <!--Aqui se cargará el formulario que mande el js -->
-                    
-                </div>
+            <div class="contenedor">
+                <table border="1" style="width:100%">
+                            <tr>
+                                <th>CÓDIGO DE VENTA</th>
+                                <th>CÓDIGO EMPLEADO</th>
+                                <th>CÓDIGO CLIENTE</th>
+                                <th>JUEGO</th>
+                                <th>PRECIO</th>
+                                <th>FECHA VENTA</th>
+                            </tr>
+                            {% for idventa,idjuego,idempl,precio,fecha,idcliente in respuesta %}
+                                <tr>
+                                    <td>{{idventa}}</td>
+                                    <td>{{idempl}}</td>
+                                     <td>{{idcliente}}</td>
+                                    <td>{{idjuego}}</td>
+                                    <td>{{precio}}</td>
+                                    <td>{{fecha}}</td>
+                                </tr>
+                           {% endfor %}
+                      </table>
+            </div>
+            <div class="formulario">
+                <!--Aqui se cargará el formulario que mande el js -->
             </div>
         </main>
     <footer class="foot">

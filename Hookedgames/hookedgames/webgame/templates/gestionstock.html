@@ -27,7 +27,28 @@
                 </div>
                 <div class="formulario">
                     <!--Aqui se cargará el formulario que mande el js -->
-                    
+                </div>
+                <div>
+                    {% if ver %}
+                        <table border="1" style="width:100%">
+                            <tr>
+                                <th>CÓDIGO DE STOCK</th>
+                                <th>JUEGO</th>
+                                 <th>PRECIO</th>
+                                <th>CANTIDAD</th>
+                                <th>SEDE</th>
+                            </tr>
+                            {% for idstock,juego,cantidad,precio,sede in respuesta %}
+                                <tr>
+                                    <td>{{idstoc}}</td>
+                                    <td>{{juego}}</td>
+                                     <td>{{precio}}</td>
+                                    <td>{{cantidad}}</td>
+                                    <td>{{sede}}</td>
+                                </tr>
+                           {% endfor %}
+                      </table>
+                    {% endif %}
                 </div>
             </div>
         </main>

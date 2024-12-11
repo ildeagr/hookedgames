@@ -1,5 +1,4 @@
 from django.urls import path
-
 from webgame import views
 
 urlpatterns = [
@@ -19,6 +18,11 @@ urlpatterns = [
     path('loginempleados', views.loginempleados, name='loginempleados'),
     path('menuempleados', views.menuempleados, name='menuempleados'),
     path('gestion', views.gestion, name='gestion'),
+    path('gestionventas', views.gestionventas, name='gestionventas'),
+
+    path('buscarstock', views.buscarstock, name='buscarstock'),
+    path('modificarstock', views.modificarstock, name='modificarstock'),
+    path('verstockcompleto', views.verstockcompleto, name='verstockcompleto'),
 
     path('cerrarsesion', views.cerrarsesion, name='cerrarsesion'),
 
