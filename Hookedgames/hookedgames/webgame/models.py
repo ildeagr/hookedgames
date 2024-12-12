@@ -196,10 +196,10 @@ class Peticion:
             pues = cursor.var(cx_Oracle.STRING)
             sed = cursor.var(cx_Oracle.NUMBER)
 
-            cursor.callproc("ALTA_BAJA_MODI_HK.ver_HK", (int(emp_id),nom,pues,sed))
+            cursor.callproc("ALTA_BAJA_MODI_HK.ver_HK", (emp_id,nom,pues,sed))
             self.connection.commit()
 
-            datos=(emp_id,nom.getvalue(),pues.getvalue(),sed.getvalue())
+            datos={emp_id,nom.getvalue(),pues.getvalue(),sed.getvalue()}
 
             print(datos)
 

@@ -366,9 +366,9 @@ from django.views.decorators.csrf import csrf_exempt
 #Muestra la info de un empleado
 def ver_empleado(request):
      if request.method == 'POST':
-          emp_id = request.POST['id']
-          emp_id = int(emp_id)
+          emp_id = int(request.POST['id'])
           accion = Peticion()
+
           tabla = accion.ver_empleado(emp_id)
 
           context = {
