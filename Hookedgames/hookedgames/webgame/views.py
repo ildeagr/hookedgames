@@ -107,7 +107,12 @@ def agregarcarrito(request):
      cantidades = request.session['cantidades']
 
      if idg in carrito:
-          cantidades[idg] += 1
+          i = 0
+          for clave, valor in cantidades:
+               if clave == idg:
+                    cantidades[i][idg] +=1
+               else:
+                    i += 1
           return redirect("volvercatalogo")
      else:
          carrito.append(idg)
