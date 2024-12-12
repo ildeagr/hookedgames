@@ -27,7 +27,9 @@
         <main>
             <section>
                 <fieldset>
-                    <table class="tabla" border="1" style="width:100%">
+                    <form action="eliminarcarrito" method="post">
+                         {% csrf_token %}
+                        <table class="tabla" border="1" style="width:100%">
                             <tr>
                                 <th>TITULO</th>
                                 <th>CARATULA</th>
@@ -38,9 +40,13 @@
                                     <td>{{titulo}}</td>
                                     <td><img class="img" src="{% static 'caratulas/'%}{{caratula}}" width="150" height="150"></td>
                                     <td>{{precio}}</td>
+                                    {% set clave = {{idgame}} %}
+                                    <td>{{cantidades}}</td>
+                                    <td><button id="button_add" name="eliminar" value="{{idgame}}">Eliminar</button></td>
                                 </tr>
                             {%endfor%}
-                    </table>
+                        </table>
+                    </form>
                </fieldset>
             </section>
         </main>

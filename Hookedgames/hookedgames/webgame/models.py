@@ -145,7 +145,7 @@ class Peticion:
 
         return cursor
 
-
+# Inserta un nuevo empleado
     def alta_empleado(self, emp_id, nombre,passw, puesto, sede):
         rowcount = 0
         cursor = self.connection.cursor()
@@ -159,6 +159,7 @@ class Peticion:
 
         return rowcount
 
+# Borra un empleado
     def baja_empleado(self, emp_id):
         rowcount = 0
         cursor = self.connection.cursor()
@@ -172,6 +173,7 @@ class Peticion:
 
         return rowcount
 
+# Modifica un empleado
     def modi_empleado(self, emp_id, nombre,passw, puesto, sede):
         rowcount = 0
         cursor = self.connection.cursor()
@@ -185,6 +187,7 @@ class Peticion:
 
         return rowcount
 
+# Trae la informacion del empleado indicado
     def ver_empleado(self, emp_id):
         datos = ()
         cursor = self.connection.cursor()

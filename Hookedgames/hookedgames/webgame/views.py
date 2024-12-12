@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from urllib3 import request
+
 from webgame.models import Peticion
 import requests
 
@@ -15,25 +17,13 @@ def index(request):
     }
     return render(request, "index.html",context)
 
+# Muestra el formulario de contacto
+def contacto(request):
+     return render(request, "contacto.html")
+
 # Comprueba datos del cliente para inicio sesion
 def login(request):
      return render(request, "login.html")
-
-# Muestra la página para registrarse como cliente nuevo
-def registro(request):
-     return render(request, "registro.html")
-
-# Página para volver al catálogo una vez iniciada la sesion
-def volvercatalogo(request):
-     consulta = Peticion()
-     catalogue = consulta.uploadcata()
-
-     context = {
-
-          'lista_catalogo': catalogue
-     }
-
-     return render(request, "catalogo.html", context)
 
 # Carga el catálogo si se inicia sesion con éxito
 def catalogo(request):
@@ -67,6 +57,24 @@ def catalogo(request):
           }
           return render(request, "login.html",context)
 
+
+# Página para volver al catálogo una vez iniciada la sesion
+def volvercatalogo(request):
+     consulta = Peticion()
+     catalogue = consulta.uploadcata()
+
+     context = {
+
+          'lista_catalogo': catalogue
+     }
+
+     return render(request, "catalogo.html", context)
+
+
+# Muestra la página para registrarse como cliente nuevo
+def registro(request):
+     return render(request, "registro.html")
+
 # Registra los datos del nuevo cliente en la BBDD
 def nuevocliente(request):
      dni = request.POST['txtdni']
@@ -87,87 +95,66 @@ def nuevocliente(request):
      else:
           return render(request, "registro.html")
 
-# Comprueba datos del empleado para inicio sesion
-def loginempleados(request):
-      return render(request, "loginempleados.html")
-
-# Muestra el menu empleados una vez iniciada la sesion
-def menuempleados(request):
-     passw2 = ''
-     user = request.POST['txtuser']
-     passw = request.POST['txtpass']
-
-     consulta = Peticion()
-     respuesta = consulta.selectempl(user)
-
-     for i in respuesta:
-          passw2 = i
-
-     if passw == passw2[0]:
-          request.session['usuario_empl'] = user
-
-          return render(request, "menuempleados.html")
-     else:
-          return render(request, "loginempleados.html")
-
-def volveralmenuempleados(request):
-     return render(request, "menuempleados.html")
-
-# Muestra la página de gestion según lo seleccionado
-def gestion(request):
-     name = request.POST.get('submit')
-
-     if name == 'stock':
-          return render(request, "gestionstock.html")
-
-     elif name == 'personal':
-          return render(request, "gestionpersonal.html")
-
-     elif name == 'ventas':
-          consulta = Peticion()
-          ventas = consulta.selectventas()
-
-          context = {
-
-               'lista_catalogo': ventas
-          }
-          return render(request, "gestionventas.html",context)
-
-     return render(request, "gestionstock.html")
-
-# Muestra el formulario de contacto
-def contacto(request):
-     return render(request, "contacto.html")
 
 # Agrega articulos al carrito
 def agregarcarrito(request):
      if 'carrito' not in request.session:
           request.session['carrito'] = []
+          request.session['cantidades'] = []
 
      idg = request.POST['agregar']
      carrito = request.session['carrito']
+     cantidades = request.session['cantidades']
 
      if idg in carrito:
+          cantidades[idg] += 1
           return redirect("volvercatalogo")
      else:
          carrito.append(idg)
+         cantidades.append({idg,1})
          request.session['carrito'] = carrito
+         request.session['cantidades'] = cantidades
 
      return redirect("volvercatalogo")
+
+# Comprueba datos del cliente para inicio sesion
+def eliminarcarrito(request):
+     idg = request.POST['eliminar']
+     carrito = request.session['carrito']
+     cantidades = request.session['cantidades']
+
+     i=0
+     for clave, valor in cantidades:
+          if clave == idg:
+               cantidades.pop(i)
+          else:
+               i +=1
+
+     carrito.remove(idg)
+     request.session['carrito'] = carrito
+     request.session['cantiades'] = cantidades
+
+     return render(request, "carrito.html")
 
 # Muestra lo que contiene el carrito
 def vercarrito(request):
      carrito = request.session['carrito']
-
+     cantidades = request.session['cantidades']
      datos = ",".join(carrito)
-
-     print(datos)
 
      consulta = Peticion()
      cesta = consulta.selectcarro(datos)
 
+     i = 0
+     for diccionariocantidades in cantidades:
+          for clave, valor in diccionariocantidades.items():
+               cesta[i][clave] = valor
+               i += 1
+
+     print(cantidades)
+
      context = {
-          'lista': cesta
+          'lista': cesta,
      }
      return render(request, "carrito.html", context)
 
@@ -200,6 +187,59 @@ def mensaje(request):
      }
 
      return render(request, "mensaje.html",context)
+
+
+# Comprueba datos del empleado para inicio sesion
+def loginempleados(request):
+      return render(request, "loginempleados.html")
+
+# Muestra el menu empleados una vez iniciada la sesion
+def menuempleados(request):
+     passw2 = ''
+     user = request.POST['txtuser']
+     passw = request.POST['txtpass']
+
+     consulta = Peticion()
+     respuesta = consulta.selectempl(user)
+
+     for i in respuesta:
+          passw2 = i
+
+     if passw == passw2[0]:
+          request.session['usuario_empl'] = user
+
+          return render(request, "menuempleados.html")
+     else:
+          return render(request, "loginempleados.html")
+
+# Para volver al menú empleados si la sesion está abierta
+def volveralmenuempleados(request):
+     return render(request, "menuempleados.html")
+
+# Muestra la página de gestion según lo seleccionado
+def gestion(request):
+     name = request.POST.get('submit')
+
+     if name == 'stock':
+          return render(request, "gestionstock.html")
+
+     elif name == 'personal':
+          return render(request, "gestionpersonal.html")
+
+     elif name == 'ventas':
+          consulta = Peticion()
+          ventas = consulta.selectventas()
+
+          context = {
+
+               'lista_catalogo': ventas
+          }
+          return render(request, "gestionventas.html",context)
+
+     return render(request, "gestionstock.html")
+
+
+
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
@@ -252,10 +292,9 @@ def verstockcompleto(request):
      return render(request, "gestionstock.html", context)
 
 
-
-
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
+# Inserta un empleado nuevo
 def alta_empleado(request):
      if request.method == 'POST':
           emp_id = request.POST['id']
@@ -273,6 +312,8 @@ def alta_empleado(request):
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
+
+# Borra un empleado
 def baja_empleado(request):
      if request.method == 'POST':
           emp_id = request.POST['Id']
@@ -295,6 +336,8 @@ def baja_empleado(request):
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
+
+# Modifica datos de un empleado
 def modi_empleado(request):
      if request.method == 'POST':
           emp_id = request.POST['id']
@@ -314,6 +357,8 @@ def modi_empleado(request):
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
+
+#Muestra la info de un empleado
 def ver_empleado(request):
      if request.method == 'POST':
           emp_id = request.POST['id']
