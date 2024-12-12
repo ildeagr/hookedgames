@@ -31,16 +31,13 @@
                             <tr>
                                 <th>TITULO</th>
                                 <th>CARATULA</th>
-                                <th>CANTIDAD</th>
                                 <th>Precio</th>
                             </tr>
-                            {% for juego in carrito %}
+                            {% for idgame, titulo, caratula, plataforma, genero, precio in lista %}
                                 <tr>
-                                    <td>{{juego.titulo}}</td>
-                                    <td>{{juego.carátula}}</td>
-                                    <td><button class="button" onclick="restarproducto()">-</button> <span class="cantidad" id="cantidad">{{juego.cantidad}}</span>
-                                    <button class="button" onclick="sumarproducto()">+</button></td>
-                                    <td>{{juego.precio}}</td>
+                                    <td>{{titulo}}</td>
+                                    <td><img class="img" src="{% static 'caratulas/'%}{{caratula}}" width="150" height="150"></td>
+                                    <td>{{precio}}</td>
                                 </tr>
                             {%endfor%}
                     </table>

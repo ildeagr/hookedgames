@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect
 from webgame.models import Peticion
 import requests
 
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
-
 
 # Carga la webapi en la página pricipal
 def index(request):
@@ -17,9 +14,6 @@ def index(request):
          'datos': info['results']
     }
     return render(request, "index.html",context)
-
-def gestionventas(request):
-     return render(request, "gestionventas.html")
 
 # Comprueba datos del cliente para inicio sesion
 def login(request):
@@ -54,6 +48,7 @@ def catalogo(request):
           passw2 = i
 
      if passw == passw2[1]:
+           del request.session['carrito']
            request.session['usuario_email'] = email
            request.session['usuario_id'] = passw2[0]
            consulta=Peticion()
@@ -74,14 +69,14 @@ def catalogo(request):
 
 # Registra los datos del nuevo cliente en la BBDD
 def nuevocliente(request):
+     dni = request.POST['txtdni']
      nom = request.POST['txtnombre']
-     ape = request.POST['txtapellido']
      passw = request.POST['txtpass']
      email = request.POST['txtemail']
      direc = request.POST['txtdirec']
      tele = request.POST['txttelf']
 
-     datos=(0,nom,ape,passw,email,direc,tele)
+     datos=(int(dni),nom,passw,email,direc,int(tele))
 
      consulta = Peticion()
      rowcount=consulta.insert(datos)
@@ -90,10 +85,14 @@ def nuevocliente(request):
           return render(request, "login.html")
 
      else:
-          return render(request, "regitro.html")
+          return render(request, "registro.html")
 
 # Comprueba datos del empleado para inicio sesion
 def loginempleados(request):
+      return render(request, "loginempleados.html")
+
+# Muestra el menu empleados una vez iniciada la sesion
+def menuempleados(request):
      passw2 = ''
      user = request.POST['txtuser']
      passw = request.POST['txtpass']
@@ -111,8 +110,7 @@ def loginempleados(request):
      else:
           return render(request, "loginempleados.html")
 
-# Muestra el menu empleados una vez iniciada la sesion
-def menuempleados(request):
+def volveralmenuempleados(request):
      return render(request, "menuempleados.html")
 
 # Muestra la página de gestion según lo seleccionado
@@ -143,35 +141,35 @@ def contacto(request):
 
 # Agrega articulos al carrito
 def agregarcarrito(request):
-     producto = ''
-     carrito = request.session.get('carrito', [])
+     if 'carrito' not in request.session:
+          request.session['carrito'] = []
+
      idg = request.POST['agregar']
+     carrito = request.session['carrito']
 
-     consulta = Peticion()
-     resultado = consulta.selectproduct(idg)
-
-     for i in resultado:
-          producto = i
-
-     if producto[0] in carrito:
-        carrito[producto[0]]['cantidad'] += 1
+     if idg in carrito:
+          return redirect("volvercatalogo")
      else:
-         carrito[producto[0]] = {
-              'titulo': producto[1],
-              'carátula': producto[2],
-              'precio': producto[5],
-              'cantidad': 1
-         }
-     request.session['carrito'] = carrito
+         carrito.append(idg)
+         request.session['carrito'] = carrito
 
      return redirect("volvercatalogo")
 
 # Muestra lo que contiene el carrito
 def vercarrito(request):
-     carrito = request.session.get('carrito', {})
+     carrito = request.session['carrito']
 
-     print(carrito)
-     return render(request, "carrito.html", {'carrito': carrito})
+     datos = ",".join(carrito)
+
+     print(datos)
+
+     consulta = Peticion()
+     cesta = consulta.selectcarro(datos)
+
+     context = {
+          'lista': cesta
+     }
+     return render(request, "carrito.html", context)
 
 # Muestra los datos de perfil del cliente de la sesion abierta
 def perfil(request):
@@ -187,10 +185,10 @@ def perfil(request):
 
 # Borra los datos almacenados de la sesion y muestra la página principal
 def cerrarsesion(request):
-     request.session['usuario_id'] = ''
-     request.session['usuario_email'] = ''
-     request.session['carrito'] = ''
-     request.session['usuario_empl'] = ''
+     del request.session['usuario_id']
+     del request.session['usuario_email']
+     del request.session['carrito']
+     del request.session['usuario_empl']
      return render(request, "index.html")
 
 # Muestra un mensaje cuando mandamos un formulario de contacto
@@ -203,16 +201,24 @@ def mensaje(request):
 
      return render(request, "mensaje.html",context)
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+
 # Muestra el stock de un juego concreto
 def buscarstock(request):
      titulo = request.POST['titulo']
      consulta = Peticion()
      consultastock = consulta.select_stock(titulo)
+
      context = {
           'Gestion_Almacenes': consultastock,
+          'buscar': 'True',
           'ver': 'False'
      }
      return render(request, "gestionstock.html", context)
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 
 # Modifica el stock de un articulo
 def modificarstock(request):
@@ -228,6 +234,7 @@ def modificarstock(request):
 
           context = {
                'Gestion_Almacenes': resultado,
+               'buscar': 'False',
                'ver': 'True'
           }
           return render(request, "gestionstock.html", context)
@@ -245,3 +252,78 @@ def verstockcompleto(request):
      return render(request, "gestionstock.html", context)
 
 
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def alta_empleado(request):
+     if request.method == 'POST':
+          emp_id = request.POST['id']
+          nombre = request.POST['nombre']
+          passw = request.POST['password']
+          puesto = request.POST['puesto']
+          sede = request.POST['sede']
+
+          emp_id = int(emp_id)
+          sede = int(sede)
+          accion = Peticion()
+          accion.alta_empleado(emp_id,nombre,passw,puesto,sede)
+
+          return render(request, "gestionpersonal.html")
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def baja_empleado(request):
+     if request.method == 'POST':
+          emp_id = request.POST['Id']
+          accion = Peticion()
+          rowcount = accion.baja_empleado(int(emp_id))
+
+          if rowcount != 0:
+               context = {
+                    'mensajeerror': 'OperaciÓn realizada',
+               }
+               return render(request, "gestionpersonal.html")
+
+          else:
+
+               context = {
+                    'mensajeerror' : 'Error en la operación',
+               }
+               return render(request, "gestionpersonal.html")
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def modi_empleado(request):
+     if request.method == 'POST':
+          emp_id = request.POST['id']
+          nombre = request.POST['nombre']
+          passw = request.POST['password']
+          puesto = request.POST['puesto']
+          sede = request.POST['sede']
+
+          emp_id = int(emp_id)
+          sede = int(sede)
+          accion = Peticion()
+          accion.modi_empleado(emp_id,nombre,passw,puesto,sede)
+
+
+          return render(request, "gestionpersonal.html")
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def ver_empleado(request):
+     if request.method == 'POST':
+          emp_id = request.POST['id']
+          emp_id = int(emp_id)
+          accion = Peticion()
+          tabla = accion.ver_empleado(emp_id)
+
+          context = {
+                 'lista': tabla,
+                 'tabla' : 'True'
+          }
+
+          return render(request, "gestionpersonal.html", context)

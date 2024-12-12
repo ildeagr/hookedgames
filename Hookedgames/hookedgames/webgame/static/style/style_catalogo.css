@@ -142,7 +142,7 @@ main{
 
 section{
     background-color: var(--calPolygreen);
-    width: min(60rem , 100%); /* Utilizar el valor más pequeño entre 60rem y el 100% */
+    width: min(70rem , 100%); /* Utilizar el valor más pequeño entre 60rem y el 100% */
     padding: 1rem;
     border-radius: 0.8rem;
     margin: 2rem auto 2rem auto;
@@ -151,6 +151,8 @@ section{
 .tabla{
     text-align: center;
     color: var(--blanco);
+    font-family: var(--fuenteParrafos);
+    font-size: 1.5rem;
 }
 
 footer{

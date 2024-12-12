@@ -1,0 +1,8 @@
+create or replace package alta_baja_modi_HK
+as
+procedure alta_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_no IN empleados.nombre%TYPE, p_emp_puesto IN empleados.puesto%TYPE, p_emp_sede IN empleados.idsede%TYPE, p_afectados OUT number);
+procedure baja_HK(p_emp_id IN empleados.idempleado%TYPE);
+procedure modi_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_puesto IN empleados.puesto%TYPE, p_emp_sede IN empleados.idsede%TYPE);
+procedure ver_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_nombre OUT empleados.nombre%TYPE, p_emp_puesto OUT empleados.puesto%TYPE, p_emp_sede OUT empleados.idsede%TYPE);
+
+end;

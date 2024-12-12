@@ -17,6 +17,7 @@
 
     --blanco: rgba(255,255,255,1);
     --negro: rgba(0,0,0,1);
+    --gris: rgba(81,81,81,1);
     
 }
 
@@ -64,50 +65,55 @@ h3{
 }
 
 body{
-    background-color: var(--teagreen);
+    background-color: var(--negro);
+    background-image: url('https://media.rawg.io/media/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg');
+    background-repeat: no-repeat;
+    background-size: cover, contain;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+.subtitulo{
+    text-align: center;
+    color: var(--blanco);
+    font-family: var(--fuenteHeading);
+    background-color: var(--negro);
+    margin: 0 0 0 0;
+}
 
 main{
     min-height: 100%;
     flex: 1; /*Hace que main ocupe el espacio restante dentro del display flex que tiene body*/
+	place-items: center;
 }
 
 .videos{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(2,1fr);
-    max-width: 50%;
-    margin: 0 auto;
+    grid-template-columns: repeat(3,1fr);
+    margin: 2rem 2rem 2rem 2rem;
+    width: 65%;
+    place-items: center;
 }
 
-.video1{
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    justify-self: center;
+
+.game{
+    background: linear-gradient(to bottom, var(--negro), var(--gris));
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 0px 0px -20px 0px ;
+    width: 95%; /* Ajusta el ancho según tus preferencias */
+    height: 95%;
+    text-align: center;
+    align-content: stretch;
+    justify-content: stretch;
+    color: var(--blanco);
 }
 
-.video2{
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    justify-self: center;
+.image{
+    max-width: 100%;
+    height: 150px;
 }
-
-.video3{
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    justify-self: center;
-}
-
-.video4{
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    justify-self: center;
-}
-
 
 footer{
     background-color: var(--yellowgreen);

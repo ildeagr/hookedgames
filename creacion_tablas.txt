@@ -1,0 +1,59 @@
+DROP TABLE CLIEN;
+DROP TABLE GAMES;
+DROP TABLE SEDES;
+DROP TABLE EMPLEADOS;
+DROP TABLE VENTAS;
+DROP TABLE STOCK;
+
+CREATE TABLE CLIEN(
+    dni INT PRIMARY KEY,
+    Nombre varchar(50),
+    user_password varchar(50),
+    correo varchar(45),
+    direccion varchar(45),
+    telefono INT 
+);
+
+CREATE TABLE GAMES(
+      idGame int PRIMARY KEY,
+      titulo varchar(45),
+	caratula varchar (100),
+      plataforma varchar(45),
+	genero varchar (45),
+      precio int
+);
+
+CREATE TABLE SEDES(
+    idsede INT PRIMARY KEY,
+    localizacion varchar(45)
+);
+
+CREATE TABLE EMPLEADOS(
+    idEmpleado int PRIMARY KEY,
+    nombre varchar(45),
+    emp_password varchar(45),
+    puesto varchar(45),
+    idsede INT,
+	CONSTRAINT fk_sedes FOREIGN KEY(idsede) REFERENCES Sedes(idsede)
+);
+
+CREATE TABLE VENTAS(
+    idVenta int PRIMARY KEY,
+    idGame int,
+    idEmpleado int,
+    precio int,
+    fecha_venta DATE,
+    dnicliente int,
+    CONSTRAINT fk_empleados FOREIGN KEY (idEmpleado) REFERENCES Empleados(idEmpleado),
+    CONSTRAINT fk_cliente FOREIGN KEY (dnicliente) REFERENCES clien(dni)
+);
+
+
+CREATE TABLE STOCK(
+     idStock INT PRIMARY KEY,
+     idGame int UNIQUE,
+     cantidad int,
+     precio int,
+     sede int,
+	 CONSTRAINT fk_Games FOREIGN KEY (idGame) REFERENCES Games(idGame)   
+);

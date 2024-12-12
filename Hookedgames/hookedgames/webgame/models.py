@@ -10,7 +10,7 @@ class Peticion:
         registro = 0
         cursor = self.connection.cursor()
         try:
-            consulta = "INSERT INTO CLIENTES VALUES (:P1, :P2, :P3, :P4, :P5, :P6, :P7)"
+            consulta = "INSERT INTO CLIEN VALUES (:P1, :P2, :P3, :P4, :P5, :P6)"
             cursor.execute(consulta, datos)
 
             registro = cursor.rowcount
@@ -26,7 +26,7 @@ class Peticion:
     def select(self,email):
         cursor = self.connection.cursor()
         try:
-            consulta = "SELECT IDCLIEN,USER_PASSWORD FROM CLIEN WHERE CORREO=:P1"
+            consulta = "SELECT DNI, USER_PASSWORD FROM CLIEN WHERE CORREO=:P1"
             cursor.execute(consulta, (email,))
 
         except self.connection.Error as error:
@@ -38,7 +38,7 @@ class Peticion:
     def selectempl(self,user):
         cursor = self.connection.cursor()
         try:
-            consulta = "SELECT USER_PASSWORD FROM EMPLEADOS WHERE idEmpleado=:P1"
+            consulta = "SELECT EMP_PASSWORD FROM EMPLEADOS WHERE idEmpleado=:P1"
             cursor.execute(consulta, (user,))
 
         except self.connection.Error as error:
@@ -95,10 +95,11 @@ class Peticion:
 
         return cursor
 
+# Devuelve el stock del titulo indicado
     def select_stock(self, titulo):
         cursor = self.connection.cursor()
         try:
-            consulta = "SELECT * FROM GAMES WHERE TITULO=:P1"
+            consulta = "select games.idgame, games.titulo ,games.plataforma, games.precio, stock.cantidad from games inner join stock on games.idgame = stock.idgame where games.titulo = :P1"
             cursor.execute(consulta, (titulo,))
 
         except self.connection.Error as error:
@@ -106,11 +107,12 @@ class Peticion:
 
         return cursor
 
+# Modifica el stock
     def modificardatos(self, datos):
         registro = 0
         cursor = self.connection.cursor()
         try:
-            consulta = "UPDATE GAMES SET CANTIDAD = :P1 WHERE IDSTOCK = :P2"
+            consulta = "UPDATE STOCK SET CANTIDAD = :P1 WHERE IDSTOCK = :P2"
             cursor.execute(consulta, datos)
             registro = cursor.rowcount
             self.connection.commit()
@@ -119,16 +121,87 @@ class Peticion:
 
         return registro
 
+# Muestra el stock completo
     def mostrar_stock_completo(self, ):
         cursor = self.connection.cursor()
         try:
-            consulta = "SELECT * FROM GAMES"
+            consulta = "select stock.idstock, stock.cantidad, stock.precio, stock.sede, games.titulo from stock inner join games on stock.idgame = games.idgame"
             cursor.execute(consulta)
-            resultados = cursor.fetchall()
-            for fila in resultados:
-                print(fila)
 
         except self.connection.Error as error:
             print("Error: ", error)
 
         return cursor
+
+# Trae la informacion de los elementos del carrito
+    def selectcarro(self, datos):
+        cursor = self.connection.cursor()
+        try:
+            consulta = "select * from games where idgame IN("+datos+")"
+            cursor.execute(consulta)
+
+        except self.connection.Error as error:
+            print("Error: ", error)
+
+        return cursor
+
+
+    def alta_empleado(self, emp_id, nombre,passw, puesto, sede):
+        rowcount = 0
+        cursor = self.connection.cursor()
+        try:
+            rowcount = cursor.var(cx_Oracle.NUMBER)
+            cursor.callproc("ALTA_BAJA_MODI_HK.alta_HK", (emp_id, nombre, passw, puesto, sede,rowcount))
+            self.connection.commit()
+
+        except self.connection.Error as error:
+            print("Error: ", error)
+
+        return rowcount
+
+    def baja_empleado(self, emp_id):
+        rowcount = 0
+        cursor = self.connection.cursor()
+        try:
+            rowcount = cursor.var(cx_Oracle.NUMBER)
+            cursor.callproc("ALTA_BAJA_MODI_HK.baja_HK", (emp_id,))
+            self.connection.commit()
+
+        except self.connection.Error as error:
+            print("Error: ", error)
+
+        return rowcount
+
+    def modi_empleado(self, emp_id, nombre,passw, puesto, sede):
+        rowcount = 0
+        cursor = self.connection.cursor()
+        try:
+            rowcount = cursor.var(cx_Oracle.NUMBER)
+            cursor.callproc("ALTA_BAJA_MODI_HK.modi_HK", ( emp_id, nombre,passw, puesto, sede, rowcount))
+            self.connection.commit()
+
+        except self.connection.Error as error:
+            print("Error: ", error)
+
+        return rowcount
+
+    def ver_empleado(self, emp_id):
+        datos = ()
+        cursor = self.connection.cursor()
+        try:
+            nom = cursor.var(cx_Oracle.STRING)
+            pues = cursor.var(cx_Oracle.STRING)
+            sed = cursor.var(cx_Oracle.NUMBER)
+
+            cursor.callproc("ALTA_BAJA_MODI_HK.ver_HK", (int(emp_id),nom,pues,sed))
+            self.connection.commit()
+
+            datos=(emp_id,nom.getvalue(),pues.getvalue(),sed.getvalue())
+
+            print(datos)
+
+        except self.connection.Error as error:
+            print("Error: ", error)
+
+        return datos
+

@@ -16,11 +16,11 @@
             <img class="imgheader" src="{% static 'image/logo_empleados.png'%}" alt="" width="100px" height="100px">
         </a>
         <h1 class="titulo">Control de ventas</h1>
-        <button class="atras" onclick="history.back()">Volver</button>
+        <a class="atras" href="volveralmenuempleados" >Menú principal</a>
     </header>
         <main>
             <div class="contenedor">
-                <table border="1" style="width:100%">
+                <table class="tabla" border="1" style="width:100%">
                             <tr class="tabla_columns">
                                 <th>CÓDIGO DE VENTA</th>
                                 <th>CÓDIGO EMPLEADO</th>
@@ -29,7 +29,7 @@
                                 <th>PRECIO</th>
                                 <th>FECHA VENTA</th>
                             </tr>
-                            {% for idventa,idjuego,idempl,precio,fecha,idcliente in respuesta %}
+                            {% for idventa,idjuego,idempl,precio,fecha,idcliente in lista_catalogo %}
                                 <tr class="tabla_rows">
                                     <td>{{idventa}}</td>
                                     <td>{{idempl}}</td>

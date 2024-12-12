@@ -16,20 +16,38 @@
             <img class="imgheader" src="{% static 'image/logo_empleados.png'%}" alt="" width="100px" height="100px">
         </a>
         <h1 class="titulo">Gestión de personal</h1>
-        <button class="atras" onclick="history.back()">Volver</button>
+        <a class="atras" href="volveralmenuempleados" >Menú principal</a>
     </header>
         <main>
             <div>
                 <div class="menu">
                     <a class="button" href="#" data-form="form1">Alta empleado</a>
-                    <a class="button" href="#" data-form="form2">Baja empleado</a>
-                    <a class="button" href="#" data-form="form3">Modificar empleado</a>
+                    <a class="button" href="#" data-form="form3">Baja empleado</a>
+                    <a class="button" href="#" data-form="form2">Modificar empleado</a>
                     <a class="button" href="#" data-form="form4">Consultar empleado</a>
                 </div>
                 <div class="formulario">
                     <!--Aqui se cargará el formulario que mande el js -->
                     
                 </div>
+                {% if tabla %}
+                        <table class="tabla" border="1" style="width:100%">
+                            <tr class="tabla_columns">
+                                <th>ID EMPLEADO</th>
+                                <th>NOMBRE</th>
+                                <th>PUESTO</th>
+                                <th>SEDE </th>
+                            </tr>
+                            {% for emple in lista %}
+                                <tr class="tabla_rows">
+                                    <td>{{emple[0]}}</td>
+                                    <td>{{nombre}}</td>
+                                    <td>{{puesto}}</td>
+                                    <td>{{sede}}</td>
+                                </tr>
+                           {% endfor %}
+                      </table>
+                {% endif %}
             </div>
         </main>
     <footer class="foot">

@@ -54,8 +54,11 @@ header{
 
 .atras{
     grid-column: 3 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--darkbeige);
-    width: 100px;
+    width: 150px;
     height: 30px;
     margin: 1rem 1rem 0rem 0rem;
     border: 0;
@@ -66,6 +69,9 @@ header{
     position: absolute;
     top: 0;
     right: 0;
+    text-decoration: none;
+    color: var(--negro);
+    text-align: center;
 }
 
 .atras:hover{
@@ -114,15 +120,21 @@ main{
     margin: 2rem 1rem 2rem 1rem;
 }
 
-.tabla_columns{
-    background-color: var(--turquoise);
+
+.tabla{
+    max-width: 85%;
+    margin: 2rem auto;
 }
 
 .tabla_rows{
-    background-color: var(--ashgray);
-    color: var(--blanco);
+    text-align: center;
+    background-color: var(--beige);
 }
 
+.tabla_columns{
+    background-color: var(--turquoise);
+    color: var(--blanco);
+}
 
 footer{
     background-color: var(--turquoise);

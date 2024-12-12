@@ -15,10 +15,7 @@
     <header>
         <img class="imgheader" src="{% static 'image/logo_clientes.png'%}" alt="" width="100px" height="100px">
         <h1 class="titulo">Catálogo de juegos y consolas</h1>
-        <div class="carrito">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cantidad" id="cantidad">0</span>
-        </div>
+
         <div class="container">
             <button class="botonmenu" id="myButton">Mi cuenta</button>
             <div id="menu" class="dropdown-content">
@@ -42,9 +39,9 @@
                                     <th colspan="2">CANTIDAD</th>
                                 </tr>
                             {% for id, titulo, caratula, plataforma, genero, precio in lista_catalogo %}
-                                <tr>
+                                <tr >
                                     <td>{{titulo}}</td>
-                                    <td><img class="img" src="{% static 'caratulas/'%}{{caratula}}" ></td>
+                                    <td><img class="img" src="{% static 'caratulas/'%}{{caratula}}" width="200" height="250"></td>
                                     <td>{{plataforma}}</td>
                                     <td>{{precio}}</td>
                                     <td><button id="button_add" name="agregar" value="{{id}}">Añadir</button></td>

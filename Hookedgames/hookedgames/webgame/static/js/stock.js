@@ -1,14 +1,6 @@
 const links = document.querySelectorAll('.menu a');
 const formulario = document.querySelector('.formulario');
 
-formulario.innerHTML = `
-      <form action="stockcompleto" method="post">
-        <div class="campo_submit">
-          <button type="submit">Ver stock completo</button>
-        </div>
-      </form>
-    `;
-
 links.forEach(link => {
   link.addEventListener('click', (event) => {
     event.preventDefault();
@@ -55,7 +47,7 @@ function cargarFormulario(formId) {
 
   else if (formId === 'form3') {
     formulario.innerHTML = `
-      <form action="stockcompleto" method="get">
+      <form action="verstockcompleto" method="get">
         <div class="campo_submit">
           <button type="submit">Ver stock completo</button>
         </div>

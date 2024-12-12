@@ -1,0 +1,31 @@
+create or replace package body ALTA_BAJA_MODI_HK
+as
+procedure alta_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_no IN empleados.nombre%TYPE, p_emp_puesto IN empleados.puesto%TYPE, p_emp_sede IN empleados.idsede%TYPE, p_afectados OUT number)
+  as
+  begin
+    insert into empleados (idEmpleado, nombre, puesto, idsede) values (p_emp_id, p_emp_no, p_emp_puesto, p_emp_sede);
+    commit;
+    p_afectados:=SQL%ROWCOUNT;
+  end alta_HK;
+ 
+procedure baja_HK(p_emp_id in empleados.idempleado%TYPE)
+  as
+  begin
+    delete from empleados where empleados.idempleado =  p_emp_id;
+    commit;
+  end baja_HK;
+
+procedure modi_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_puesto IN empleados.puesto%TYPE, p_emp_sede IN empleados.idsede%TYPE)
+  as
+  begin
+    update empleados set puesto = p_emp_puesto, idsede = p_emp_sede where idEmpleado = p_emp_id;  
+    commit;  
+  end modi_HK;
+
+procedure ver_HK(p_emp_id IN empleados.idempleado%TYPE, p_emp_nombre OUT empleados.nombre%TYPE, p_emp_puesto OUT empleados.puesto%TYPE, p_emp_sede OUT empleados.idsede%TYPE)
+  as
+  begin
+    select nombre, puesto, idsede into p_emp_nombre, p_emp_puesto, p_emp_sede from empleados where idempleado = p_emp_id;
+  end ver_HK;
+  
+end; 

@@ -12,36 +12,57 @@
 </head>
 <body>
     <header>
-        <a href="http://127.0.0.1:5500/index.html">
+        <a href="">
             <img class="imgheader" src="{% static 'image/logo_empleados.png'%}" alt="" width="100px" height="100px">
         </a>
         <h1 class="titulo">Gestión de almacenes</h1>
-        <button class="atras" onclick="history.back()">Volver</button>
+        <a class="atras" href="volveralmenuempleados" >Menú principal</a>
     </header>
         <main>
             <div>
                 <div class="menu">
                     <a class="button" href="#" data-form="form1">Buscar Stock</a>
                     <a class="button" href="#" data-form="form2">Modificar Stock</a>
-                    <a class="button" href="#" data-form="form3">Ver Stock completo</a>
+                    <a class="button" href="{% url 'verstockcompleto' %}" data-form="form3">Ver Stock completo</a>
                 </div>
                 <div class="formulario">
                     <!--Aqui se cargará el formulario que mande el js -->
                 </div>
-                <div>
-                    {% if ver %}
-                        <table border="1" style="width:100%">
-                            <tr>
+                <div class="tables">
+                    {% if buscar == "True" %}
+                        <table class="tabla" border="1" style="width:100%">
+                            <tr class="tabla_columns">
+                                <th>IDJUEGO</th>
+                                <th>TITULO</th>
+                                <th>PLATAFORMA</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD STOCK</th>
+                            </tr>
+                            {% for idgam,titulo,plataforma, precio, cantidad in Gestion_Almacenes %}
+                                <tr class="tabla_rows">
+                                    <td>{{idgam}}</td>
+                                    <td>{{titulo}}</td>
+                                    <td>{{plataforma}}</td>
+                                    <td>{{precio}}</td>
+                                    <td>{{cantidad}}</td>
+                                </tr>
+                           {% endfor %}
+                      </table>
+                    {% endif %}
+
+                    {% if ver == "True" %}
+                        <table class="tabla" border="1" style="width:100%">
+                            <tr class="tabla_columns">
                                 <th>CÓDIGO DE STOCK</th>
                                 <th>JUEGO</th>
                                  <th>PRECIO</th>
                                 <th>CANTIDAD</th>
                                 <th>SEDE</th>
                             </tr>
-                            {% for idstock,juego,cantidad,precio,sede in respuesta %}
-                                <tr>
-                                    <td>{{idstoc}}</td>
-                                    <td>{{juego}}</td>
+                            {% for idstock,cantidad,precio,sede, titulo in Gestion_Almacenes %}
+                                <tr class="tabla_rows">
+                                    <td>{{idstock}}</td>
+                                    <td>{{titulo}}</td>
                                      <td>{{precio}}</td>
                                     <td>{{cantidad}}</td>
                                     <td>{{sede}}</td>
