@@ -14,7 +14,14 @@ Se ha desarrollado un proyecto completo modelo-vista-controlador con Django, en 
 ## Funcionamiento de la página
 La aplicación inicia en una pantalla principal donde a traves del consumo de una Web Api se muestra la lista de juegos actuales.
 
+![Captura de pantalla 2024-12-16 a las 16 33 32](https://github.com/user-attachments/assets/40b96c4d-be1c-46d8-93d4-1ee1193a2706)
+
 Para la parte del usuario/cliente en la parte superior izquierda tiene el acceso al registro y al inicio de sesión.
 
 Una vez logeado, el cliente puede ver el catálogo de juegos disponibles para añadir al carrito de compra. Al mismo tiempo en dicha pantalla tiene un menu desplegable para gestiónar el vcarrito y su perfil.
 
+
+## Bibliografias y fuentes de terceros
+
+1. https://rawg.io  (Página desde donde usamos el Web Api).
+2. 
