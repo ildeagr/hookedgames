@@ -33,16 +33,20 @@
                             <tr>
                                 <th>TITULO</th>
                                 <th>CARATULA</th>
-                                <th>Precio</th>
+                                <th>PLATAFORMA</th>
+                                <th>GENERO</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD</th>
                             </tr>
-                            {% for idgame, titulo, caratula, plataforma, genero, precio in lista %}
+                            {% for cesta in lista %}
                                 <tr>
-                                    <td>{{titulo}}</td>
-                                    <td><img class="img" src="{% static 'caratulas/'%}{{caratula}}" width="150" height="150"></td>
-                                    <td>{{precio}}</td>
-                                    {% set clave = {{idgame}} %}
-                                    <td>{{cantidades}}</td>
-                                    <td><button id="button_add" name="eliminar" value="{{idgame}}">Eliminar</button></td>
+                                    <td>{{cesta.nombre}}</td>
+                                    <td><img class="img" src="{% static 'caratulas/'%}{{cesta.caratula}}" width="100" height="100"></td>
+                                    <td>{{cesta.plataforma}}</td>
+                                    <td>{{cesta.genero}}</td>
+                                    <td>{{cesta.precio}}€</td>
+                                    <td>{{cesta.cantidad}}</td>
+                                    <td><button id="button_add" name="eliminar" value="{{cesta.id}}">Eliminar</button></td>
                                 </tr>
                             {%endfor%}
                         </table>

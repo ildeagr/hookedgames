@@ -130,6 +130,22 @@ button{
     grid-column: 2 / 3;
 }
 
+
+.tabla{
+    max-width: 85%;
+    margin: 2rem auto;
+}
+
+.tabla_rows{
+    text-align: center;
+    background-color: var(--beige);
+}
+
+.tabla_columns{
+    background-color: var(--turquoise);
+    color: var(--blanco);
+}
+
 footer{
     background-color: var(--turquoise);
 

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from urllib3 import request
 
 from webgame.models import Peticion
 import requests
@@ -38,7 +37,6 @@ def catalogo(request):
           passw2 = i
 
      if passw == passw2[1]:
-           del request.session['carrito']
            request.session['usuario_email'] = email
            request.session['usuario_id'] = passw2[0]
            consulta=Peticion()
@@ -53,7 +51,7 @@ def catalogo(request):
      else:
 
           context = {
-               'mensaje': 'Error de credenciales.vuelva a intentarlo o registre nuevo usuario.'
+               'mensaje': 'Error de credenciales.'
           }
           return render(request, "login.html",context)
 
@@ -107,18 +105,22 @@ def agregarcarrito(request):
      cantidades = request.session['cantidades']
 
      if idg in carrito:
-          i = 0
-          for clave, valor in cantidades:
-               if clave == idg:
-                    cantidades[i][idg] +=1
-               else:
-                    i += 1
+          i=0
+          while i < len(cantidades):
+               if int(idg) == cantidades[i]:
+                    cantidades[i+1]= cantidades[i+1] + 1
+                    request.session['cantidades'] = cantidades
+                    return redirect("volvercatalogo")
+               i+=2
+
           return redirect("volvercatalogo")
      else:
          carrito.append(idg)
-         cantidades.append({idg,1})
+         cantidades.append(int(idg))
+         cantidades.append(1)
          request.session['carrito'] = carrito
          request.session['cantidades'] = cantidades
+
 
      return redirect("volvercatalogo")
 
@@ -129,37 +131,50 @@ def eliminarcarrito(request):
      cantidades = request.session['cantidades']
 
      i=0
-     for clave, valor in cantidades:
-          if clave == idg:
+     while i < len(cantidades):
+          if idg == cantidades[i]:
                cantidades.pop(i)
+               cantidades.pop(i+1)
+               print(cantidades)
           else:
-               i +=1
+
+               i+=2
 
      carrito.remove(idg)
      request.session['carrito'] = carrito
      request.session['cantiades'] = cantidades
 
-     return render(request, "carrito.html")
+     return redirect("vercarrito")
 
 # Muestra lo que contiene el carrito
 def vercarrito(request):
      carrito = request.session['carrito']
      cantidades = request.session['cantidades']
      datos = ",".join(carrito)
+     nuevo={}
+     nuevalista = []
+     nuevalista.clear()
 
+     print(datos)
      consulta = Peticion()
      cesta = consulta.selectcarro(datos)
 
-     i = 0
-     for diccionariocantidades in cantidades:
-          for clave, valor in diccionariocantidades.items():
-               cesta[i][clave] = valor
-               i += 1
-
-     print(cantidades)
+     i=0
+     j=1
+     for diccionario in range(len(cesta)):
+          nuevo.clear()
+          nuevo['id'] = cesta[diccionario][i]
+          nuevo['nombre'] = cesta[diccionario][i+1]
+          nuevo['caratula'] = cesta[diccionario][i+2]
+          nuevo['plataforma'] = cesta[diccionario][i+3]
+          nuevo['genero'] = cesta[diccionario][i+4]
+          nuevo['precio'] = cesta[diccionario][i+5]
+          nuevo['cantidad'] = cantidades[j]
+          j+=2
+          nuevalista.append(nuevo.copy())
 
      context = {
-          'lista': cesta,
+          'lista': nuevalista,
      }
      return render(request, "carrito.html", context)
 
@@ -372,8 +387,17 @@ def ver_empleado(request):
           tabla = accion.ver_empleado(emp_id)
 
           context = {
-                 'lista': tabla,
+                 'lista': [
+                      {
+                           'id':tabla[0],
+                           'nombre':tabla[1],
+                           'puesto':tabla[2],
+                           'sede':tabla[3],
+                      }
+                 ],
                  'tabla' : 'True'
           }
+
+          print(context)
 
           return render(request, "gestionpersonal.html", context)

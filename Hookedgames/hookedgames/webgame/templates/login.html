@@ -19,22 +19,22 @@
             <section class="formulario">
                 <fieldset>
                     <h3 class="logintitle">Iniciar sesión para continuar</h3>
-                    <form action="catalogo" method="post">
+                    <form id="myform" action="catalogo" method="post">
                         {% csrf_token %}
                         <div class="campo">
                             <label>Correo:</label>
-                            <input class="form_text" type="email" name="txtemail" placeholder="Introducir correo">
+                            <input id="email" class="form_text" type="email" name="txtemail" placeholder="Introducir correo">
                         </div>
                         <div class="campo">
                             <label>Contraseña:</label>
-                            <input class="form_text" type="password" name="txtpass" placeholder="Introducir contraseña">
+                            <input id="contrasena" class="form_text" type="password" name="txtpass" placeholder="Introducir contraseña">
                         </div>
                         <div class="campo">
                             <input class="form_submit" type="submit" name="Iniciar sesión" value="Iniciar sesión">
                             <a class="form_regis" href="registro">Registrarse</a>
                         </div>
                         {% if mensaje %}
-                        <h5>{{mensaje}}</h5>
+                        <h3>{{mensaje}}</h3>
                         {% endif %}
                     </form>
                 </fieldset>
@@ -48,5 +48,6 @@
             <a class="enlaces_footer" href="{% url 'contacto' %}">Contacte con nosotros</a>
         </div>
     </footer>
+<script src="{% static 'js/validacion_login.js'%}"></script>
 </body>
 </html>

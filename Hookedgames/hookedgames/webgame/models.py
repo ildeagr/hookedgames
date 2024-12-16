@@ -143,7 +143,7 @@ class Peticion:
         except self.connection.Error as error:
             print("Error: ", error)
 
-        return cursor
+        return cursor.fetchall()
 
 # Inserta un nuevo empleado
     def alta_empleado(self, emp_id, nombre,passw, puesto, sede):
@@ -199,9 +199,7 @@ class Peticion:
             cursor.callproc("ALTA_BAJA_MODI_HK.ver_HK", (emp_id,nom,pues,sed))
             self.connection.commit()
 
-            datos={emp_id,nom.getvalue(),pues.getvalue(),sed.getvalue()}
-
-            print(datos)
+            datos=(emp_id,nom.getvalue(),pues.getvalue(),int(sed.getvalue()))
 
         except self.connection.Error as error:
             print("Error: ", error)

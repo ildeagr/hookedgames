@@ -22,15 +22,15 @@
             <section class="formulario">
                 <fieldset>
                     <h3 class="logintitle">Iniciar sesión</h3>
-                    <form action="menuempleados" method="post">
+                    <form id="myform" action="menuempleados" method="post">
                         {% csrf_token %}
                         <div class="campo">
                             <label>Número empleado:</label>
-                            <input class="form_text" type="text" name="txtuser" placeholder="Introducir número">
+                            <input id="email" class="form_text" type="text" name="txtuser" placeholder="Introducir número">
                         </div>
                         <div class="campo">
                             <label>Contraseña:</label>
-                            <input class="form_text" type="password" name="txtpass" placeholder="Introducir contraseña">
+                            <input id="contrasena" class="form_text" type="password" name="txtpass" placeholder="Introducir contraseña">
                         </div>
                         <div class="campo">
                             <input class="form_submit" type="submit" name="Iniciar sesión" value="Iniciar sesión">
@@ -44,5 +44,6 @@
             <p>© 2024 HookedGames. Todos los derechos reservados.</p>
         </div>
     </footer>
+<script src="{% static 'js/validacion_login.js'%}"></script>
 </body>
 </html>
