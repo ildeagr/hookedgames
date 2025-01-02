@@ -13,35 +13,34 @@ Se ha desarrollado un proyecto completo modelo-vista-controlador con Django, en 
 
 ## Funcionamiento de la página.
 La aplicación inicia en una pantalla principal donde a traves del consumo de una Web Api se muestra la lista de juegos actuales.
+Para la parte del usuario/cliente en la parte superior izquierda tiene el acceso al registro y al inicio de sesión.
 
 ![Captura de pantalla 2024-12-16 a las 16 33 32](https://github.com/user-attachments/assets/40b96c4d-be1c-46d8-93d4-1ee1193a2706)
 
-Para la parte del usuario/cliente en la parte superior izquierda tiene el acceso al registro y al inicio de sesión.
 
 Una vez logeado, el cliente puede ver el catálogo de juegos disponibles para añadir al carrito de compra. Al mismo tiempo en dicha pantalla tiene un menu desplegable para gestiónar el carrito y su perfil.
+![Captura de pantalla 2025-01-02 a las 17 24 33](https://github.com/user-attachments/assets/2f9e51b2-0e2f-43a8-8f2f-5e6a53b40058)
 
-![Captura de pantalla (5)](https://github.com/user-attachments/assets/f967111c-4300-440f-8a6d-b49768be4787)
-
-![Captura de pantalla (6)](https://github.com/user-attachments/assets/7a78fc1d-fce0-4dcf-820a-10462c7a81e3)
+![Captura de pantalla 2025-01-02 a las 17 24 56](https://github.com/user-attachments/assets/d29054ef-a58d-4827-b9ce-2e7ecf11cc21)
 
 En caso de ser necesario se ha incluido un formulario de contacto con la empresa para cualquier consulta.
+![Captura de pantalla 2025-01-02 a las 17 26 45](https://github.com/user-attachments/assets/c91b131b-d59d-4976-9d5a-8b4216cf87fd)
 
-![Captura de pantalla (3)](https://github.com/user-attachments/assets/85735a90-4a31-485e-a512-eeaaf14dfcab)
 
 
 ## Funcionamiento gestión interna empresarial.
 Se ha implementado la parte interna de gestión de la empresa. En ella cada empleado puede logearse para acceder al stock nacional y gestionarlo.
-
-![Captura de pantalla (4)](https://github.com/user-attachments/assets/8d6c0c62-4465-4c2d-a02b-fffa8aec7588)
+![Captura de pantalla 2025-01-02 a las 17 25 14](https://github.com/user-attachments/assets/4edc5957-77fd-46b8-bbc5-71c76e0f9f32)
 
 Gestión de almacenes.
-![Captura de pantalla (11)](https://github.com/user-attachments/assets/b9ca47ba-8265-4b32-8c64-9cdb28519c82)
+![Captura de pantalla 2025-01-02 a las 17 28 10](https://github.com/user-attachments/assets/4668a72f-c4d5-4023-a557-625a78477fa1)
 
 Gestión de ventas realizadas.
-![Captura de pantalla (21)](https://github.com/user-attachments/assets/9f7a72f1-fd84-4af5-af47-a4bf56c5a4fd)
+![Captura de pantalla 2025-01-02 a las 17 25 47](https://github.com/user-attachments/assets/49506a74-8edc-49f2-9c13-287593bd0d9d)
 
 Los usuarios de RRHH al logearse también tienen autorización para dar de alta, baja o modificar los datos de empleados.
-![Captura de pantalla (14)](https://github.com/user-attachments/assets/9ca6e46d-156a-485e-97b1-7334d60f2fad)
+![Captura de pantalla 2025-01-02 a las 17 23 31](https://github.com/user-attachments/assets/19d09542-53fd-4f7a-9aae-e1eb920530bb)
+
 
 
 ## Bibliografias y fuentes de terceros
