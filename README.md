@@ -46,4 +46,3 @@ Los usuarios de RRHH al logearse también tienen autorización para dar de alta,
 ## Bibliografias y fuentes de terceros
 
 1. https://rawg.io  (Página desde donde usamos el Web Api).
-2. 
